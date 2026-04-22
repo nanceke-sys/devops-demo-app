@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keith's DevOps Dashboard</title>
+</head>
+<body>
+  <h1>Keith's DevOps Dashboard</h1>
+  <p><strong>Version:</strong> <span id="version">Loading...</span></p>
+  <p><strong>Hostname:</strong> <span id="hostname">Loading...</span></p>
+
+  <script>
+    fetch('/api/info')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('version').textContent = data.version;
+        document.getElementById('hostname').textContent = data.hostname;
+      })
+      .catch(() => {
+        document.getElementById('version').textContent = 'Error';
+        document.getElementById('hostname').textContent = 'Error';
+      });
+  </script>
+</body>
+</html>
